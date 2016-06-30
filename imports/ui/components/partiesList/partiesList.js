@@ -4,7 +4,7 @@ import uiRouter from 'angular-ui-router';
 
 import { name as PartyAdd } from '../partyAdd/partyAdd';
 import { name as PartyRemove } from '../partyRemove/partyRemove';
-import { Parties } from '../../../api/parties';
+import Parties from '../../../api/parties';
 import template from './partiesList.html';
 
 class PartiesList {

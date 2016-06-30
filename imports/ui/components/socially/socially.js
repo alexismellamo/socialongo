@@ -18,6 +18,7 @@ export default angular.module(name, [
   PartiesList,
   PartyDetails,
   Navigation,
+  'accounts.ui',
 ]).component(name, {
   template,
   controllerAs: name,
