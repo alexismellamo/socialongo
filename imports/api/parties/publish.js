@@ -26,6 +26,16 @@ if (Meteor.isServer) {
           },
         },
         ],
+      }, {
+        // when logged in user is one of invited
+        $and: [{
+          invited: this.userId,
+        }, {
+          invited: {
+            $exists: true,
+          },
+        },
+        ],
       },
     ],
     };

@@ -1,8 +1,10 @@
 import { Meteor } from 'meteor/meteor';
+import { Email } from 'meteor/email';
 import { Parties } from '../api/parties';
 
 Meteor.startup(() => {
-  console.log('Hola bb');
+  process.env.MAIL_URL = `smtp://${Meteor.settings.private.email}:` +
+    `${Meteor.settings.private.password}@smtp.gmail.com:465/`;
   if (Parties.find().count() === 0) {
     const parties = [
       {
