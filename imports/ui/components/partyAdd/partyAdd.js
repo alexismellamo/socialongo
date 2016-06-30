@@ -3,7 +3,7 @@ import angularMeteor from 'angular-meteor';
 import { Meteor } from 'meteor/meteor';
 
 import template from './partyAdd.html';
-import Parties from '../../../api/parties';
+import { Parties } from '../../../api/parties/index';
 
 class PartyAdd {
   constructor() {

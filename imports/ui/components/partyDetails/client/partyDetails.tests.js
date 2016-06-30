@@ -13,6 +13,7 @@ describe('PartyDetails', () => {
       _id: 'partyId',
       name: 'Foo',
       description: 'Birthday of Foo',
+      public: true,
     };
 
     beforeEach(() => {
@@ -41,6 +42,7 @@ describe('PartyDetails', () => {
           $set: {
             name: party.name,
             description: party.description,
+            public: party.public,
           },
         });
       });

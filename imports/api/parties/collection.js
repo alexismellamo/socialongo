@@ -1,6 +1,6 @@
 import { Mongo } from 'meteor/mongo';
 
-const Parties = new Mongo.Collection('parties');
+export const Parties = new Mongo.Collection('parties');
 
 Parties.allow({
   insert(userId, party) {
@@ -15,5 +15,3 @@ Parties.allow({
     return userId && party.owner === userId;
   },
 });
-
-export default Parties;

@@ -1,7 +1,8 @@
 import { Meteor } from 'meteor/meteor';
-import Parties from '../imports/api/parties';
+import { Parties } from '../api/parties';
 
 Meteor.startup(() => {
+  console.log('Hola bb');
   if (Parties.find().count() === 0) {
     const parties = [
       {
