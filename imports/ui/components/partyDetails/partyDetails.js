@@ -65,8 +65,8 @@ function config($stateProvider) {
         } else {
           return $q.resolve();
         }
-      }
-    }
+      },
+    },
   });
 }
 
