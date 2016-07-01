@@ -1,5 +1,6 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
+import _ from 'underscore';
 
 import { Meteor } from 'meteor/meteor';
 
@@ -10,12 +11,24 @@ class PartyRsvp {
     this.answer('yes');
   }
 
+  isYes() {
+    return this.isAnswer('yes');
+  }
+
   maybe() {
     this.answer('maybe');
   }
 
+  isMaybe() {
+    return this.isAnswer('maybe');
+  }
+
   no() {
     this.answer('no');
+  }
+
+  isNo() {
+    return this.isAnswer('no');
   }
 
   answer(answer) {
@@ -26,6 +39,15 @@ class PartyRsvp {
         console.log('RSVP done!');
       }
     });
+  }
+
+  isAnswer(answer) {
+    if (this.party) {
+      return !!_.findWhere(this.party.rsvps, {
+        user: Meteor.userId(),
+        rsvp: answer,
+      });
+    }
   }
 }
 

@@ -10,7 +10,6 @@ import { name as PartiesSort } from '../partiesSort/partiesSort';
 import { name as PartyCreator } from '../partyCreator/partyCreator';
 import { name as PartyRsvp } from '../partyRsvp/partyRsvp';
 import { name as PartyRsvpsList } from '../partyRsvpsList/partyRsvpsList';
-import { name as PartyUnanswered } from '../partyUnanswered/partyUnanswered';
 import { name as PartiesMap } from '../partiesMap/partiesMap';
 import { Parties } from '../../../api/parties/index';
 import template from './partiesList.html';
@@ -86,7 +85,6 @@ export default angular.module(name, [
   PartyCreator,
   PartyRsvp,
   PartyRsvpsList,
-  PartyUnanswered,
 ]).component(name, {
   template,
   controllerAs: name,
