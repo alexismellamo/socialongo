@@ -11,6 +11,7 @@ import { name as PartyCreator } from '../partyCreator/partyCreator';
 import { name as PartyRsvp } from '../partyRsvp/partyRsvp';
 import { name as PartyRsvpsList } from '../partyRsvpsList/partyRsvpsList';
 import { name as PartyUnanswered } from '../partyUnanswered/partyUnanswered';
+import { name as PartiesMap } from '../partiesMap/partiesMap';
 import { Parties } from '../../../api/parties/index';
 import template from './partiesList.html';
 import utilsPagination from 'angular-utils-pagination';
@@ -79,6 +80,7 @@ export default angular.module(name, [
   uiRouter,
   utilsPagination,
   PartiesSort,
+  PartiesMap,
   PartyAdd,
   PartyRemove,
   PartyCreator,
