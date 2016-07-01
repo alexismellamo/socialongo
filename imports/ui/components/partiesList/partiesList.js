@@ -8,6 +8,9 @@ import { name as PartyAdd } from '../partyAdd/partyAdd';
 import { name as PartyRemove } from '../partyRemove/partyRemove';
 import { name as PartiesSort } from '../partiesSort/partiesSort';
 import { name as PartyCreator } from '../partyCreator/partyCreator';
+import { name as PartyRsvp } from '../partyRsvp/partyRsvp';
+import { name as PartyRsvpsList } from '../partyRsvpsList/partyRsvpsList';
+import { name as PartyUnanswered } from '../partyUnanswered/partyUnanswered';
 import { Parties } from '../../../api/parties/index';
 import template from './partiesList.html';
 import utilsPagination from 'angular-utils-pagination';
@@ -17,6 +20,8 @@ class PartiesList {
     'ngInject';
 
     $reactive(this).attach($scope);
+
+    this.subscribe('users');
 
     this.perPage = 3;
     this.page = 1;
@@ -65,6 +70,9 @@ export default angular.module(name, [
   PartyAdd,
   PartyRemove,
   PartyCreator,
+  PartyRsvp,
+  PartyRsvpsList,
+  PartyUnanswered,
 ]).component(name, {
   template,
   controllerAs: name,
