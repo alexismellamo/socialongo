@@ -47,7 +47,19 @@ class PartiesList {
       partiesCount() {
         return Counts.get('numberOfParties');
       },
+
+      isLoggedIn() {
+        return !!Meteor.userId();
+      },
+
+      currentUserId() {
+        return Meteor.userId();
+      },
     });
+  }
+
+  isOwner(party) {
+    return this.isLoggedIn && party.owner === this.currentUserId;
   }
 
   pageChanged(newPage) {
