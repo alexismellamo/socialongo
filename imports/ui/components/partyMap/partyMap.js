@@ -12,34 +12,34 @@ class PartyMap {
     this.map = {
       center: {
         latitude: 45,
-        longitude: -73,
+        longitude: -73
       },
       zoom: 8,
       events: {
         click: (mapModel, eventName, originalEventArgs) => {
           this.setLocation(originalEventArgs[0].latLng.lat(), originalEventArgs[0].latLng.lng());
           $scope.$apply();
-        },
-      },
+        }
+      }
     };
 
     this.marker = {
       options: {
-        draggable: true,
+        draggable: true
       },
       events: {
         dragend: (marker, eventName, args) => {
           this.setLocation(marker.getPosition().lat(), marker.getPosition().lng());
           $scope.$apply();
-        },
-      },
+        }
+      }
     };
   }
 
   setLocation(latitude, longitude) {
     this.location = {
       latitude,
-      longitude,
+      longitude
     };
   }
 }
@@ -50,12 +50,12 @@ const name = 'partyMap';
 export default angular.module(name, [
   angularMeteor,
   'nemLogging', // https://github.com/angular-ui/angular-google-maps/issues/1633
-  'uiGmapgoogle-maps',
+  'uiGmapgoogle-maps'
 ]).component(name, {
   template,
   controllerAs: name,
   bindings: {
-    location: '=',
+    location: '='
   },
-  controller: PartyMap,
+  controller: PartyMap
 });

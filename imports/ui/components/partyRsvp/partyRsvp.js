@@ -10,7 +10,6 @@ class PartyRsvp {
   yes() {
     this.answer('yes');
   }
-
   isYes() {
     return this.isAnswer('yes');
   }
@@ -18,7 +17,6 @@ class PartyRsvp {
   maybe() {
     this.answer('maybe');
   }
-
   isMaybe() {
     return this.isAnswer('maybe');
   }
@@ -26,7 +24,6 @@ class PartyRsvp {
   no() {
     this.answer('no');
   }
-
   isNo() {
     return this.isAnswer('no');
   }
@@ -36,16 +33,15 @@ class PartyRsvp {
       if (error) {
         console.error('Oops, unable to rsvp!');
       } else {
-        console.log('RSVP done!');
+        console.log('RSVP done!')
       }
     });
   }
-
   isAnswer(answer) {
-    if (this.party) {
+    if(this.party) {
       return !!_.findWhere(this.party.rsvps, {
         user: Meteor.userId(),
-        rsvp: answer,
+        rsvp: answer
       });
     }
   }
@@ -55,12 +51,12 @@ const name = 'partyRsvp';
 
 // create a module
 export default angular.module(name, [
-  angularMeteor,
+  angularMeteor
 ]).component(name, {
   template,
   controllerAs: name,
   bindings: {
-    party: '<',
+    party: '<'
   },
-  controller: PartyRsvp,
+  controller: PartyRsvp
 });

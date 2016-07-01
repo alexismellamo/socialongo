@@ -10,12 +10,8 @@ import { name as DisplayNameFilter } from '../../filters/displayNameFilter';
  * PartyCreator component
  */
 class PartyCreator {
-  constructor($scope, $reactive) {
+  constructor($scope) {
     'ngInject';
-
-    $reactive(this).attach($scope);
-
-    this.subscribe('users');
 
     $scope.viewModel(this);
 
@@ -32,7 +28,7 @@ class PartyCreator {
         }
 
         return Meteor.users.findOne(owner) || 'nobody';
-      },
+      }
     });
   }
 }
@@ -42,12 +38,12 @@ const name = 'partyCreator';
 // create a module
 export default angular.module(name, [
   angularMeteor,
-  DisplayNameFilter,
+  DisplayNameFilter
 ]).component(name, {
   template,
   controllerAs: name,
   bindings: {
-    party: '<',
+    party: '<'
   },
-  controller: PartyCreator,
+  controller: PartyCreator
 });

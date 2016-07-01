@@ -13,13 +13,13 @@ describe('PartyDetails', () => {
       _id: 'partyId',
       name: 'Foo',
       description: 'Birthday of Foo',
-      public: true,
+      public: true
     };
 
     beforeEach(() => {
       inject(($rootScope, $componentController) => {
         controller = $componentController(PartyDetails, {
-          $scope: $rootScope.$new(true),
+          $scope: $rootScope.$new(true)
         });
       });
     });
@@ -33,7 +33,7 @@ describe('PartyDetails', () => {
 
       it('should update a proper party', () => {
         expect(Parties.update.calls.mostRecent().args[0]).toEqual({
-          _id: party._id,
+          _id: party._id
         });
       });
 
@@ -42,8 +42,8 @@ describe('PartyDetails', () => {
           $set: {
             name: party.name,
             description: party.description,
-            public: party.public,
-          },
+            public: party.public
+          }
         });
       });
     });

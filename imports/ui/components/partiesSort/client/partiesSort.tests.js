@@ -8,19 +8,19 @@ describe('PartiesSort', () => {
 
   describe('controller', () => {
     let controller;
-    const onChange = function () {};
-
+    const onChange = function() {};
     const property = 'name';
     const order = -1;
+
 
     beforeEach(() => {
       inject(($rootScope, $componentController) => {
         controller = $componentController(PartiesSort, {
-          $scope: $rootScope.$new(true),
+          $scope: $rootScope.$new(true)
         }, {
           onChange,
           property,
-          order,
+          order
         });
       });
     });
@@ -45,8 +45,8 @@ describe('PartiesSort', () => {
 
         expect(controller.onChange).toHaveBeenCalledWith({
           sort: {
-            [property]: order,
-          },
+            [property]: order
+          }
         });
       });
     });

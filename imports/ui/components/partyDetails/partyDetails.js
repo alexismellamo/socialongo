@@ -1,10 +1,11 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
+
 import { Meteor } from 'meteor/meteor';
 
 import template from './partyDetails.html';
-import { Parties } from '../../../api/parties/index';
+import { Parties } from '../../../api/parties';
 import { name as PartyUninvited } from '../partyUninvited/partyUninvited';
 import { name as PartyMap } from '../partyMap/partyMap';
 
@@ -14,23 +15,23 @@ class PartyDetails {
 
     $reactive(this).attach($scope);
 
+    this.partyId = $stateParams.partyId;
+
     this.subscribe('parties');
     this.subscribe('users');
 
     this.helpers({
       party() {
         return Parties.findOne({
-          _id: $stateParams.partyId,
+          _id: $stateParams.partyId
         });
       },
-
       users() {
         return Meteor.users.find({});
       },
-
       isLoggedIn() {
         return !!Meteor.userId();
-      },
+      }
     });
   }
 
@@ -44,17 +45,17 @@ class PartyDetails {
 
   save() {
     Parties.update({
-      _id: this.party._id,
+      _id: this.party._id
     }, {
       $set: {
         name: this.party.name,
         description: this.party.description,
         public: this.party.public,
-        location: this.party.location,
-      },
+        location: this.party.location
+      }
     }, (error) => {
       if (error) {
-        console.log('Oops, unable to update the party... ' + error);
+        console.log('Oops, unable to update the party...');
       } else {
         console.log('Done!');
       }
@@ -69,13 +70,13 @@ export default angular.module(name, [
   angularMeteor,
   uiRouter,
   PartyUninvited,
-  PartyMap,
+  PartyMap
 ]).component(name, {
   template,
   controllerAs: name,
-  controller: PartyDetails,
+  controller: PartyDetails
 })
-.config(config);
+  .config(config);
 
 function config($stateProvider) {
   'ngInject';
@@ -90,19 +91,7 @@ function config($stateProvider) {
         } else {
           return $q.resolve();
         }
-      },
-    },
-  });
-}
-
-function run($rootScope, $state) {
-  'ngInject';
-
-  $rootScope.$on('$stateChangeError',
-    (event, toState, toParams, fromState, fromParams, error) => {
-      if (error === 'AUTH_REQUIRED') {
-        $state.go('parties');
       }
     }
-  );
+  });
 }

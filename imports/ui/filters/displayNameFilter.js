@@ -20,4 +20,6 @@ function DisplayNameFilter(user) {
 
 // create a module
 export default angular.module(name, [])
-  .filter(name, () => DisplayNameFilter);
+  .filter(name, () => {
+    return DisplayNameFilter;
+  });

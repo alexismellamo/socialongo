@@ -37,11 +37,11 @@ export function invite(partyId, userId) {
     throw new Meteor.Error(400, 'That party is public. No need to invite people.');
   }
 
-  if (userId !== party.owner && !_.contains(party.invited, userId)) {
+  if (userId !== party.owner && ! _.contains(party.invited, userId)) {
     Parties.update(partyId, {
       $addToSet: {
-        invited: userId,
-      },
+        invited: userId
+      }
     });
 
     const replyTo = getContactEmail(Meteor.users.findOne(this.userId));
@@ -52,11 +52,11 @@ export function invite(partyId, userId) {
         to,
         replyTo,
         from: 'noreply@socially.com',
-        subject: `PARTY: ${party.name}`,
+        subject: `PARTY: ${party.title}`,
         text: `
-          Hey, I just invited you to ${party.name} on Socially.
+          Hey, I just invited you to ${party.title} on Socially.
           Come check it out: ${Meteor.absoluteUrl()}
-        `,
+        `
       });
     }
   }
@@ -79,35 +79,31 @@ export function rsvp(partyId, rsvp) {
     $or: [{
       // is public
       $and: [{
-        public: true,
+        public: true
       }, {
         public: {
-          $exists: true,
-        },
-      },
-      ],
-    }, {
+          $exists: true
+        }
+      }]
+    },{
       // is owner
       $and: [{
-        owner: this.userId,
+        owner: this.userId
       }, {
         owner: {
-          $exists: true,
-        },
-      },
-      ],
+          $exists: true
+        }
+      }]
     }, {
       // is invited
       $and: [{
-        invited: this.userId,
+        invited: this.userId
       }, {
         invited: {
-          $exists: true,
-        },
-      },
-      ],
-    },
-    ],
+          $exists: true
+        }
+      }]
+    }]
   });
 
   if (!party) {
@@ -115,36 +111,34 @@ export function rsvp(partyId, rsvp) {
   }
 
   const hasUserRsvp = _.findWhere(party.rsvps, {
-    user: this.userId,
+    user: this.userId
   });
 
   if (!hasUserRsvp) {
-
     // add new rsvp entry
     Parties.update(partyId, {
       $push: {
         rsvps: {
           rsvp,
-          user: this.userId,
-        },
-      },
+          user: this.userId
+        }
+      }
     });
   } else {
-
     // update rsvp entry
     const userId = this.userId;
     Parties.update({
       _id: partyId,
-      'rsvps.user': userId,
+      'rsvps.user': userId
     }, {
       $set: {
-        'rsvps.$.rsvp': rsvp,
-      },
+        'rsvps.$.rsvp': rsvp
+      }
     });
   }
 }
 
 Meteor.methods({
   invite,
-  rsvp,
+  rsvp
 });

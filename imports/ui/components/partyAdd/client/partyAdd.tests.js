@@ -13,16 +13,16 @@ describe('PartyAdd', () => {
     const party = {
       name: 'Foo',
       description: 'Birthday of Foo',
-      public: true,
+      public: true
     };
     const user = {
-      _id: 'userId',
+      _id: 'userId'
     };
 
     beforeEach(() => {
       inject(($rootScope, $componentController) => {
         controller = $componentController(PartyAdd, {
-          $scope: $rootScope.$new(true),
+          $scope: $rootScope.$new(true)
         });
       });
 
@@ -42,7 +42,9 @@ describe('PartyAdd', () => {
       beforeEach(() => {
         spyOn(Parties, 'insert');
         spyOn(controller, 'reset').and.callThrough();
+
         controller.party = party;
+
         controller.submit();
       });
 
@@ -51,7 +53,7 @@ describe('PartyAdd', () => {
           name: party.name,
           description: party.description,
           public: party.public,
-          owner: user._id,
+          owner: user._id
         });
       });
 

@@ -16,7 +16,7 @@ class PartyUninvited {
     this.helpers({
       users() {
         return Meteor.users.find({});
-      },
+      }
     });
   }
 
@@ -39,12 +39,12 @@ const name = 'partyUninvited';
 export default angular.module(name, [
   angularMeteor,
   UninvitedFilter,
-  DisplayNameFilter,
+  DisplayNameFilter
 ]).component(name, {
   template,
   controllerAs: name,
   bindings: {
-    party: '<',
+    party: '<'
   },
-  controller: PartyUninvited,
+  controller: PartyUninvited
 });

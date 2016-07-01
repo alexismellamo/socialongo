@@ -11,8 +11,8 @@ class PartiesSort {
   changed() {
     this.onChange({
       sort: {
-        [this.property]: parseInt(this.order),
-      },
+        [this.property]: parseInt(this.order)
+      }
     });
   }
 }
@@ -21,14 +21,14 @@ const name = 'partiesSort';
 
 // create a module
 export default angular.module(name, [
-  angularMeteor,
+  angularMeteor
 ]).component(name, {
   template,
   bindings: {
     onChange: '&',
     property: '@',
-    order: '@',
+    order: '@'
   },
   controllerAs: name,
-  controller: PartiesSort,
+  controller: PartiesSort
 });

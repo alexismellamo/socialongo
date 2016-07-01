@@ -11,7 +11,7 @@ describe('PartyCreator', () => {
     let $rootScope;
     let $componentController;
     const party = {
-      _id: 'partyId',
+      _id: 'partyId'
     };
 
     beforeEach(() => {
@@ -23,13 +23,13 @@ describe('PartyCreator', () => {
 
     function component(bindings) {
       return $componentController(PartyCreator, {
-        $scope: $rootScope.$new(true),
+        $scope: $rootScope.$new(true)
       }, bindings);
     }
 
     it('should return an empty string if there is no party', () => {
       const controller = component({
-        party: undefined,
+        party: undefined
       });
 
       expect(controller.creator).toEqual('');
@@ -37,13 +37,12 @@ describe('PartyCreator', () => {
 
     it('should say `me` if logged in is the owner', () => {
       const owner = 'userId';
-
       // logged in
       spyOn(Meteor, 'userId').and.returnValue(owner);
       const controller = component({
         party: {
-          owner,
-        },
+          owner
+        }
       });
 
       expect(controller.creator).toEqual('me');
@@ -51,15 +50,13 @@ describe('PartyCreator', () => {
 
     it('should say `nobody` if user does not exist', () => {
       const owner = 'userId';
-
       // not logged in
       spyOn(Meteor, 'userId').and.returnValue(null);
-
       // no user found
       spyOn(Meteor.users, 'findOne').and.returnValue(undefined);
       const controller = component({
         party: {
-          owner,
+          owner
         }
       });
 
@@ -68,16 +65,14 @@ describe('PartyCreator', () => {
 
     it('should return user data if user exists and it is not logged one', () => {
       const owner = 'userId';
-
       // not logged in
       spyOn(Meteor, 'userId').and.returnValue(null);
-
       // user found
       spyOn(Meteor.users, 'findOne').and.returnValue('found');
       const controller = component({
         party: {
-          owner,
-        },
+          owner
+        }
       });
 
       expect(controller.creator).toEqual('found');

@@ -8,7 +8,7 @@ if (Meteor.isServer) {
     describe('invite', () => {
       function loggedIn(userId = 'userId') {
         return {
-          userId,
+          userId
         };
       }
 
@@ -61,7 +61,7 @@ if (Meteor.isServer) {
 
       it('should fail if logged in user is not the owner', () => {
         spyOn(Parties, 'findOne').and.returnValue({
-          owner: 'notUserId',
+          owner: 'notUserId'
         });
 
         expect(() => {
@@ -72,7 +72,7 @@ if (Meteor.isServer) {
       it('should fail on public party', () => {
         spyOn(Parties, 'findOne').and.returnValue({
           owner: 'userId',
-          public: true,
+          public: true
         });
 
         expect(() => {
@@ -82,7 +82,7 @@ if (Meteor.isServer) {
 
       it('should NOT invite user who is the owner', () => {
         spyOn(Parties, 'findOne').and.returnValue({
-          owner: 'userId',
+          owner: 'userId'
         });
         spyOn(Parties, 'update');
 
@@ -94,7 +94,7 @@ if (Meteor.isServer) {
       it('should NOT invite user who has been already invited', () => {
         spyOn(Parties, 'findOne').and.returnValue({
           owner: 'userId',
-          invited: ['invitedId'],
+          invited: ['invitedId']
         });
         spyOn(Parties, 'update');
 
@@ -108,7 +108,7 @@ if (Meteor.isServer) {
         const userId = 'notInvitedId';
         spyOn(Parties, 'findOne').and.returnValue({
           owner: 'userId',
-          invited: ['invitedId'],
+          invited: ['invitedId']
         });
         spyOn(Parties, 'update');
         spyOn(Meteor.users, 'findOne').and.returnValue({});
@@ -117,17 +117,16 @@ if (Meteor.isServer) {
 
         expect(Parties.update).toHaveBeenCalledWith(partyId, {
           $addToSet: {
-            invited: userId,
-          },
+            invited: userId
+          }
         });
       });
     });
-  });
 
-  describe('rsvp', () => {
+    describe('rsvp', () => {
       function loggedIn(userId = 'userId') {
         return {
-          userId,
+          userId
         };
       }
 
@@ -173,6 +172,7 @@ if (Meteor.isServer) {
         });
       });
 
-      // TODO: more tests
+      // TODO: more tests  
     });
+  });
 }

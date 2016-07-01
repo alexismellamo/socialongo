@@ -17,13 +17,13 @@ const name = 'partyRsvpUsers';
 // create a module
 export default angular.module(name, [
   angularMeteor,
-  DisplayNameFilter,
+  DisplayNameFilter
 ]).component(name, {
   template,
   controllerAs: name,
   bindings: {
     rsvps: '<',
-    type: '@',
+    type: '@'
   },
-  controller: PartyRsvpUsers,
+  controller: PartyRsvpUsers
 });

@@ -9,12 +9,12 @@ const name = 'partyRsvpsList';
 
 // create a module
 export default angular.module(name, [
-  angularMeteor,
+  angularMeteor
 ]).component(name, {
   template,
   controllerAs: name,
   bindings: {
-    rsvps: '<',
+    rsvps: '<'
   },
-  controller: PartyRsvpsList,
+  controller: PartyRsvpsList
 });

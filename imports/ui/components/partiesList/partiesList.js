@@ -1,19 +1,19 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
+import utilsPagination from 'angular-utils-pagination';
 
 import { Counts } from 'meteor/tmeasday:publish-counts';
 
-import { name as PartyAdd } from '../partyAdd/partyAdd';
-import { name as PartyRemove } from '../partyRemove/partyRemove';
+import template from './partiesList.html';
+import { Parties } from '../../../api/parties';
 import { name as PartiesSort } from '../partiesSort/partiesSort';
+import { name as PartiesMap } from '../partiesMap/partiesMap';
+import { name as PartyAddButton } from '../partyAddButton/partyAddButton';
+import { name as PartyRemove } from '../partyRemove/partyRemove';
 import { name as PartyCreator } from '../partyCreator/partyCreator';
 import { name as PartyRsvp } from '../partyRsvp/partyRsvp';
 import { name as PartyRsvpsList } from '../partyRsvpsList/partyRsvpsList';
-import { name as PartiesMap } from '../partiesMap/partiesMap';
-import { Parties } from '../../../api/parties/index';
-import template from './partiesList.html';
-import utilsPagination from 'angular-utils-pagination';
 
 class PartiesList {
   constructor($scope, $reactive) {
@@ -21,40 +21,37 @@ class PartiesList {
 
     $reactive(this).attach($scope);
 
-    this.subscribe('users');
-
     this.perPage = 3;
     this.page = 1;
     this.sort = {
-      name: 1,
+      name: 1
     };
     this.searchText = '';
 
     this.subscribe('parties', () => [{
-      limit: parseInt(this.perPage),
-      skip: parseInt((this.getReactively('page') - 1) * this.perPage),
-      sort: this.getReactively('sort'),
-    }, this.getReactively('searchText'),
+        limit: parseInt(this.perPage),
+        skip: parseInt((this.getReactively('page') - 1) * this.perPage),
+        sort: this.getReactively('sort')
+      }, this.getReactively('searchText')
     ]);
+
+    this.subscribe('users');
 
     this.helpers({
       parties() {
         return Parties.find({}, {
-          sort: this.getReactively('sort'),
+          sort : this.getReactively('sort')
         });
       },
-
       partiesCount() {
         return Counts.get('numberOfParties');
       },
-
       isLoggedIn() {
         return !!Meteor.userId();
       },
-
       currentUserId() {
         return Meteor.userId();
-      },
+      }
     });
   }
 
@@ -80,24 +77,23 @@ export default angular.module(name, [
   utilsPagination,
   PartiesSort,
   PartiesMap,
-  PartyAdd,
+  PartyAddButton,
   PartyRemove,
   PartyCreator,
   PartyRsvp,
-  PartyRsvpsList,
+  PartyRsvpsList
 ]).component(name, {
   template,
   controllerAs: name,
-  controller: PartiesList,
+  controller: PartiesList
 })
-.config(config);
+  .config(config);
 
 function config($stateProvider) {
   'ngInject';
   $stateProvider
     .state('parties', {
       url: '/parties',
-      template: '<parties-list></parties-list>',
+      template: '<parties-list></parties-list>'
     });
-
 }

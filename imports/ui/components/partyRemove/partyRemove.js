@@ -1,8 +1,8 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import { Parties } from '../../../api/parties/index';
 
 import template from './partyRemove.html';
+import { Parties } from '../../../api/parties';
 
 class PartyRemove {
   remove() {
@@ -16,12 +16,12 @@ const name = 'partyRemove';
 
 // create a module
 export default angular.module(name, [
-  angularMeteor,
+  angularMeteor
 ]).component(name, {
   template,
   bindings: {
-    party: '<',
+    party: '<'
   },
   controllerAs: name,
-  controller: PartyRemove,
+  controller: PartyRemove
 });

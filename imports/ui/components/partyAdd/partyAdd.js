@@ -1,9 +1,10 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
+
 import { Meteor } from 'meteor/meteor';
 
 import template from './partyAdd.html';
-import { Parties } from '../../../api/parties/index';
+import { Parties } from '../../../api/parties';
 
 class PartyAdd {
   constructor() {
@@ -13,6 +14,11 @@ class PartyAdd {
   submit() {
     this.party.owner = Meteor.user()._id;
     Parties.insert(this.party);
+
+    if(this.done) {
+      this.done();
+    }
+
     this.reset();
   }
 
@@ -25,9 +31,12 @@ const name = 'partyAdd';
 
 // create a module
 export default angular.module(name, [
-  angularMeteor,
+  angularMeteor
 ]).component(name, {
   template,
+  bindings: {
+    done: '&?'
+  },
   controllerAs: name,
-  controller: PartyAdd,
+  controller: PartyAdd
 });

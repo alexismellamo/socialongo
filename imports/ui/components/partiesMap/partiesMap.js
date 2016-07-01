@@ -13,9 +13,9 @@ class PartiesMap {
     this.map = {
       center: {
         latitude: 45,
-        longitude: -73,
+        longitude: -73
       },
-      zoom: 8,
+      zoom: 8
     };
   }
 }
@@ -26,12 +26,12 @@ const name = 'partiesMap';
 export default angular.module(name, [
   angularMeteor,
   'nemLogging', // https://github.com/angular-ui/angular-google-maps/issues/1633
-  'uiGmapgoogle-maps',
+  'uiGmapgoogle-maps'
 ]).component(name, {
   template,
   controllerAs: name,
   bindings: {
-    parties: '=',
+    parties: '='
   },
-  controller: PartiesMap,
+  controller: PartiesMap
 });

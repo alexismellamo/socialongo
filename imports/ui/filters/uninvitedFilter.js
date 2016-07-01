@@ -8,13 +8,14 @@ function UninvitedFilter(users, party) {
     return false;
   }
 
-  return users.filter(user =>
-
+  return users.filter((user) => {
     // if not the owner and not invited
-    user._id !== party.owner && !_.contains(party.invited, user._id)
-  );
+    return user._id !== party.owner && !_.contains(party.invited, user._id);
+  });
 }
 
 // create a module
 export default angular.module(name, [])
-  .filter(name, () => UninvitedFilter);
+  .filter(name, () => {
+    return UninvitedFilter;
+  });
