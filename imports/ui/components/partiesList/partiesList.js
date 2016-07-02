@@ -14,6 +14,7 @@ import { name as PartyRemove } from '../partyRemove/partyRemove';
 import { name as PartyCreator } from '../partyCreator/partyCreator';
 import { name as PartyRsvp } from '../partyRsvp/partyRsvp';
 import { name as PartyRsvpsList } from '../partyRsvpsList/partyRsvpsList';
+import { name as PartyImage } from '../partyImage/partyImage';
 
 class PartiesList {
   constructor($scope, $reactive) {
@@ -24,34 +25,38 @@ class PartiesList {
     this.perPage = 3;
     this.page = 1;
     this.sort = {
-      name: 1
+      name: 1,
     };
     this.searchText = '';
 
     this.subscribe('parties', () => [{
         limit: parseInt(this.perPage),
         skip: parseInt((this.getReactively('page') - 1) * this.perPage),
-        sort: this.getReactively('sort')
-      }, this.getReactively('searchText')
+        sort: this.getReactively('sort'),
+      }, this.getReactively('searchText'),
     ]);
 
     this.subscribe('users');
+    this.subscribe('images');
 
     this.helpers({
       parties() {
         return Parties.find({}, {
-          sort : this.getReactively('sort')
+          sort: this.getReactively('sort'),
         });
       },
+
       partiesCount() {
         return Counts.get('numberOfParties');
       },
+
       isLoggedIn() {
         return !!Meteor.userId();
       },
+
       currentUserId() {
         return Meteor.userId();
-      }
+      },
     });
   }
 
@@ -81,11 +86,11 @@ export default angular.module(name, [
   PartyRemove,
   PartyCreator,
   PartyRsvp,
-  PartyRsvpsList
+  PartyRsvpsList,
 ]).component(name, {
   template,
   controllerAs: name,
-  controller: PartiesList
+  controller: PartiesList,
 })
   .config(config);
 
@@ -94,6 +99,6 @@ function config($stateProvider) {
   $stateProvider
     .state('parties', {
       url: '/parties',
-      template: '<parties-list></parties-list>'
+      template: '<parties-list></parties-list>',
     });
 }

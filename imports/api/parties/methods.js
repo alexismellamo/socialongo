@@ -52,9 +52,9 @@ export function invite(partyId, userId) {
         to,
         replyTo,
         from: 'noreply@socially.com',
-        subject: `PARTY: ${party.title}`,
+        subject: `PARTY: ${party.name}`,
         text: `
-          Hey, I just invited you to ${party.title} on Socially.
+          Hey, I just invited you to ${party.name} on Socially.
           Come check it out: ${Meteor.absoluteUrl()}
         `
       });

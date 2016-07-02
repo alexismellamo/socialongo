@@ -1,3 +1,3 @@
 # Socialongo
 
-*This is only for test
+*An app for your social events*
